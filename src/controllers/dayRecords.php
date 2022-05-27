@@ -1,0 +1,3 @@
+<?php
+
+loadTemplateView('dayRecords');
