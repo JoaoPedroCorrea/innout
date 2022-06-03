@@ -1,1 +1,3 @@
-<h1>teste</h1>
+<?php
+
+print_r($registries);

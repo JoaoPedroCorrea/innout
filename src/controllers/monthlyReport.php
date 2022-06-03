@@ -2,4 +2,10 @@
 session_start();
 requireValidSession();
 
-loadTemplateView('monthlyReport');
+$user = $_SESSION['user'];
+
+$registries = WorkingHours::getMonthlyReport($user->id, new DateTime());
+
+loadTemplateView('monthlyReport', [
+    'registries' => $registries
+]);
