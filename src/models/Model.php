@@ -9,7 +9,7 @@ class Model {
         $this->loadFromArray($arr);
     }
 
-    public function loadFromArray($arr) {
+    public function loadFromArray($arr){
         if($arr){
             foreach($arr as $key => $value){
                 $this->$key = $value;
@@ -45,7 +45,7 @@ class Model {
         
     }
 
-    public static function getResultSetFromSelect($filters = [], $columns = '*') {
+    public static function getResultSetFromSelect($filters = [], $columns = '*'){
         $sql = "SELECT ${columns} FROM " . static::$tableName . static::getFilters($filters);
         $result = Database::getResultFromQuery($sql);
         if($result->num_rows === 0) {
@@ -55,7 +55,7 @@ class Model {
         }
     }
 
-    public function insert() {
+    public function insert(){
         $sql = "INSERT INTO " . static::$tableName . " (" . implode(",", static::$columns) . ") VALUES (";
         foreach(static::$columns as $col) {
             $sql .= static::getFormatedValue($this->$col) . ",";
@@ -65,7 +65,7 @@ class Model {
         $this->id = $id;
     }
 
-    public function update() {
+    public function update(){
         $sql = "UPDATE " . static::$tableName . " SET ";
         foreach(static::$columns as $col) {
             $sql .= " ${col} = " . static::getFormatedValue($this->$col) . ",";
@@ -88,6 +88,11 @@ class Model {
             }
         }
         return $sql;
+    }
+
+    public static function getCount($filters = []){
+        $result = static::getResultSetFromSelect($filters, 'count(*) as count');
+        return $result->fetch_assoc()['count'];
     }
 
     private static function getFormatedValue($value){
