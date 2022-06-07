@@ -6,10 +6,10 @@
             'icofont-user'
         );
 
-        include(TEMPLATE_PATH . "message.php");
+        include(TEMPLATE_PATH . "/messages.php");
     ?>
 
-    <form action="#" method="post">
+    <form action="#" method="POST">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Nome</label>

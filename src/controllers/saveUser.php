@@ -2,4 +2,18 @@
 session_start();
 requireValidSession();
 
-loadTemplateView('saveUser');
+$exception = null;
+
+if(count($_POST) > 0){
+    try{
+        $newUser = new User($_POST);
+        $newUser->insert();
+        addSuccessMessage('Usuário cadastrado com sucesso!');
+        $_POST = [];
+    } catch(Exception $e){
+        $exception = $e;
+    }
+}
+
+
+loadTemplateView('saveUser', $_POST + ["exception" => $exception]);
