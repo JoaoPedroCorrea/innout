@@ -9,7 +9,11 @@ if(isset($_GET['delete'])){
         User::deleteById($_GET['delete']);
         addSuccessMessage('Usuário excluido com sucesso!');
     } catch(Exception $e){
-        $exception = $e;
+        if(strpos($e->getMessage(), 'FOREIGN KEY')){
+            addErrorMessage('Não é possivel excluir usuários com registros de ponto.');
+        } else{
+            $exception = $e;
+        }
     }
 }
 
