@@ -19,8 +19,16 @@ class User extends Model {
         $this->validate();
         $this->is_admin = $this->is_admin ? 1 : 0;
         if(!$this->end_date) $this->end_date = null;
-        $this->password = password_hash($this->password, PASSWORD_DEFAULT); 
+        // $this->password = password_hash($this->password, PASSWORD_DEFAULT); 
         return parent::insert();
+    }
+
+    public function update(){
+        $this->validate();
+        $this->is_admin = $this->is_admin ? 1 : 0;
+        if(!$this->end_date) $this->end_date = null;
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        return parent::update();
     }
 
     private function validate() {
@@ -38,7 +46,7 @@ class User extends Model {
 
         if(!$this->start_date) {
             $errors['start_date'] = 'Data de Admissão é um campo obrigatório.';
-        } else if(DateTime::createFromFormat('Y-m-d', $this->start_date)) {
+        } else if(DateTime::createFromFormat('d-m-Y', $this->start_date)) {
             $errors['start_date'] = 'Data de admissão deve seguir o padrão dd/mm/aaaa.';
         }
 

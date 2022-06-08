@@ -33,6 +33,10 @@ class Model {
         $this->values[$key] = $value;
     }
 
+    public function getValues(){
+        return $this->values;
+    }
+
     public static function get($filters = [], $columns = '*'){
         $objects = [];
         $result = static::getResultSetFromSelect($filters, $columns = '*');
