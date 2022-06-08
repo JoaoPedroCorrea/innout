@@ -108,7 +108,7 @@ class Model {
     
 
     public static function deleteById($id){
-        $sql = "DELETE FROM " . static::$tableName . "WHERE id = {$id}";
+        $sql = "DELETE FROM " . static::$tableName . " WHERE id = {$id}";
         Database::executeSQL($sql);
     }
 
